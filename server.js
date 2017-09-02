@@ -41,7 +41,8 @@ passport.deserializerUser(Account.deserializerUser());
 
 db( _ => {
 	app.use('/', api());
-	app.server.listen(3000);
+	var port = process.env.PORT || 3000
+	app.server.listen(port);
 });
 
 export default app;
