@@ -2,11 +2,10 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
-import LocalStrategy from 'passport-local'.'strategy';
-import flash from 'connect-flash'
+import LocalStrategy from 'passport-local';
+import flash from 'connect-flash';
 import db from './db';
 import api from './resources';
 
@@ -22,7 +21,7 @@ app.use(bodyParser.json({
 	limit : '100kb'
 }));
 
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(require('express-session')({
 	secret: 'keyboard cat',
 	resave: false,
@@ -34,15 +33,17 @@ app.use(flash());
 app.use(passport.session());
 
 //passport config
-var Account = require('./models/index');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializerUser(Account.serializerUser());
-passport.deserializerUser(Account.deserializerUser());
+//const Account = require('./models/index');
+//passport.use(new LocalStrategy(Account.authenticate()));
+//passport.serializerUser(Account.serializerUser());
+//passport.deserializerUser(Account.deserializerUser());
 
 db( _ => {
 	app.use('/', api());
 	var port = process.env.PORT || 3000
-	app.server.listen(port);
+	app.server.listen(port, () => {
+		console.log("server now running");
+	});
 });
 
 export default app;

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoClient = require('mongodb').MongoClient
 
 export default function(callback) {
-	mongoose.connect('mongodb://localhost/assessmentApi');
+	mongoClient.connect('mongodb://benjamintaiwo:assessmentapi@ds121534.mlab.com:21534/assessmentapi');
 	callback();
 }

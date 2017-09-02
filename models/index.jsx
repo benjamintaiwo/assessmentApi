@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import passportLocalMongoose from 'passport-local-mongoose';
+mongoose.Promise = global.Promise;
 
 const CountrySchema = new mongoose.Schema({
   isocode: String,
@@ -19,17 +19,9 @@ const LanguageSchema = new mongoose.Schema({
   name: String
 });
 
-const Account = new mongoose.Schema({
-    username: String,
-    password: String
-});
-
-Account.plugin(passportLocalMongoose);
-
 
 const Country  = mongoose.model('Country', CountrySchema);
 const City     = mongoose.model('City', CitySchema);
 const Language = mongoose.model('Language', LanguageSchema);
-const Account  = mongoose.model('Account', Account)
 
-export {Country, City, Language, Account}
+export {Country, City, Language}
